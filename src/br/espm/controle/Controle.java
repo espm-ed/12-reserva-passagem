@@ -6,6 +6,7 @@ import br.espm.cliente.PessoaJuridica;
 import br.espm.reserva.Reserva;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -66,7 +67,15 @@ public class Controle {
     }
 
     private void pesquisar() {
-        
+        Long identificador = Long.valueOf(showInputDialog("CPF/CNPJ"));
+        Reserva reserva = new Reserva(identificador);
+        showMessageDialog(null, listaReserva.contains(reserva));
+
+        Iterator<Reserva> it = listaReserva.iterator();
+        while(it.hasNext()) {
+            
+        }
+
     }
 
     private void reservar() {

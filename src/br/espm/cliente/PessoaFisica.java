@@ -8,6 +8,10 @@ public class PessoaFisica extends Cliente {
         this.cpf = cpf;
     }
 
+    public PessoaFisica(Long identificador) {
+        this(null, null, identificador);
+    }
+
     @Override
     public Long getIdentificador() {
         return this.cpf;
