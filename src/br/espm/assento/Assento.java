@@ -25,6 +25,14 @@ public class Assento {
         this.disponivel = disponivel;
     } 
     
+    @Override
+    public String toString() {
+        String aux = "";
+        aux += "Assento: " + assento + "\n";
+        aux += "Status: ";
+        aux += this.disponivel ? "Livre" : "Ocupado";
+        return aux;
+    }
     
 
 }

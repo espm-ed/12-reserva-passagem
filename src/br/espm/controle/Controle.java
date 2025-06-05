@@ -64,18 +64,36 @@ public class Controle {
     }
 
     private void cancelar() {
+        Long identificador = Long.valueOf(showInputDialog("CPF/CNPJ"));
+        Reserva reserva;        
+
+        // exemplo de busca usando o iterador (classe Iterator do pacote java.util)
+        Iterator<Reserva> it = listaReserva.iterator();
+        while(it.hasNext()) {
+            reserva = it.next();
+            if(reserva.getCliente().getIdentificador().equals(identificador)) {
+                it.remove();
+                return;
+            }
+        }
     }
 
     private void pesquisar() {
+        // exemplo de pesquisa usando o método contains()
         Long identificador = Long.valueOf(showInputDialog("CPF/CNPJ"));
         Reserva reserva = new Reserva(identificador);
-        showMessageDialog(null, listaReserva.contains(reserva));
+        //showMessageDialog(null, listaReserva.contains(reserva));
 
+        // exemplo de busca usando o iterador (classe Iterator do pacote java.util)
         Iterator<Reserva> it = listaReserva.iterator();
         while(it.hasNext()) {
-            
+            reserva = it.next();
+            if(reserva.getCliente().getIdentificador().equals(identificador)) {
+                showMessageDialog(null, reserva);
+                return;
+            }
         }
-
+        showMessageDialog(null, "Reserva não encontrada");
     }
 
     private void reservar() {
@@ -83,8 +101,11 @@ public class Controle {
         Cliente cliente = pesquisarCliente(identificador);
         if(cliente != null) {
             int assento = parseInt(showInputDialog(listarAssento()));
-            listaReserva.add(new Reserva(cliente, listaAssento.get(assento), 5000));
-            listaAssento.get(assento).setDisponivel(false);
+            listaReserva.add(new Reserva(cliente, listaAssento.get(assento-1), 5000));
+            listaAssento.get(assento-1).setDisponivel(false);
+        }
+        else {
+            showMessageDialog(null, "CPF/CNPJ: " + identificador + " não encontrado");
         }
     }
 
